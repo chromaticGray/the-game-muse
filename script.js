@@ -11,9 +11,9 @@ let selectedThemes = []; // Changed to array for multiple themes
 // Load Data from JSON Files
 function loadData() {
     Promise.all([
-        fetch('genres.json').then(response => response.json()),
-        fetch('mechanics.json').then(response => response.json()),
-        fetch('themes.json').then(response => response.json())
+        fetch('./genres.json').then(response => response.json()),
+        fetch('./mechanics.json').then(response => response.json()),
+        fetch('./themes.json').then(response => response.json())
     ]).then(data => {
         genres = data[0];
         mechanics = data[1];
