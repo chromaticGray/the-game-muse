@@ -42,9 +42,7 @@ function roll(category) {
             outputElement = document.getElementById('themes-output');
             break;
     }
-	console.log(items)
     randomItem = items[Math.floor(Math.random() * items.length)];
-	console.log(randomItem)
     outputElement.value = randomItem.name;
     outputElement.dataset.itemIndex = items.indexOf(randomItem);
 }
@@ -132,18 +130,6 @@ function removeItem(category, index) {
     loadIdea();
 }
 
-function removeFavorite() {
-    const index = document.getElementById('saved-ideas').value;
-    if (index === '') return;
-
-    let savedIdeas = JSON.parse(localStorage.getItem('savedIdeas'));
-    savedIdeas.splice(index, 1);
-    localStorage.setItem('savedIdeas', JSON.stringify(savedIdeas));
-
-    updateSavedIdeasDropdown();
-    alert('Favorite removed!');
-}
-
 // Event Listener for Clickable Items
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('clickable-item')) {
@@ -223,6 +209,18 @@ function saveIdea() {
     // Reset fields
     document.getElementById('idea-name').value = '';
     resetDisplay();
+}
+
+function removeFavorite() {
+    const index = document.getElementById('saved-ideas').value;
+    if (index === '') return;
+
+    let savedIdeas = JSON.parse(localStorage.getItem('savedIdeas'));
+    savedIdeas.splice(index, 1);
+    localStorage.setItem('savedIdeas', JSON.stringify(savedIdeas));
+
+    updateSavedIdeasDropdown();
+    alert('Favorite removed!');
 }
 
 // Load Idea Function
