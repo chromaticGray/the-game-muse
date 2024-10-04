@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The Game Muse</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Include CSS styles here -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Game Idea Display -->
+        <div id="game-idea-display">
+            <h2 id="game-title"></h2>
+            <p id="game-genres" style="color: purple;"></p>
+            <p id="game-mechanics" style="color: red;"></p>
+            <p id="game-theme" style="color: darkcyan;"></p>
+        </div>
+
+        <!-- Controls -->
+        <div id="controls">
+            <!-- Genres -->
+            <div class="category">
+                <h3>Game Genres</h3>
+                <button onclick="roll('genres')">Roll</button>
+                <button onclick="add('genres')">Add</button>
+                <div id="genres-output" class="output"></div>
+            </div>
+            <!-- Mechanics -->
+            <div class="category">
+                <h3>Mechanics</h3>
+                <button onclick="roll('mechanics')">Roll</button>
+                <button onclick="add('mechanics')">Add</button>
+                <div id="mechanics-output" class="output"></div>
+            </div>
+            <!-- Themes -->
+            <div class="category">
+                <h3>Themes</h3>
+                <button onclick="roll('themes')">Roll</button>
+                <button onclick="add('themes')">Add</button>
+                <div id="themes-output" class="output"></div>
+            </div>
+        </div>
+
+        <!-- Save Idea -->
+        <div id="save-idea">
+            <input type="text" id="idea-name" placeholder="Enter game idea name">
+            <button onclick="saveIdea()">Favorite</button>
+            <button onclick="clearCurrentIdea()">Clear</button>
+        </div>
+
+        <!-- Favorites -->
+        <div id="favorites">
+            <select id="saved-ideas" onchange="loadIdea()">
+                <option value="">Select a saved idea</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Include JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
