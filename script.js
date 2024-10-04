@@ -42,8 +42,9 @@ function roll(category) {
             outputElement = document.getElementById('themes-output');
             break;
     }
-
-    const randomItem = items[Math.floor(Math.random() * items.length)];
+	console.log(items)
+    randomItem = items[Math.floor(Math.random() * items.length)];
+	console.log(randomItem)
     outputElement.value = randomItem.name;
     outputElement.dataset.itemIndex = items.indexOf(randomItem);
 }
