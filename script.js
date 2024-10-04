@@ -85,11 +85,12 @@ function add(category) {
 
         // Update display
         if (selectedArray.length > 0) {
-            let names = selectedArray.map((item, index) => 
-                `<span class="clickable-item" data-category="${category}" data-index="${index}">
-                    ${item.name}
-                </span>`
-            );
+			let names = selectedArray.map(item => {
+				const originalIndex = items.indexOf(item); // Get the index from the original array
+				return `<span class="clickable-item" data-category="${category}" data-index="${originalIndex}">
+							${item.name}
+						</span>`;
+			});
             let outputText = '';
 
             if (category === 'genres') {
@@ -130,10 +131,15 @@ function removeItem(category, index) {
 }
 
 // Event Listener for Clickable Items
+// Event Listener for Clickable Items
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('clickable-item')) {
         const category = event.target.dataset.category;
         const index = parseInt(event.target.dataset.index);
+
+        console.log('Clicked category:', category); // Debugging
+        console.log('Clicked index:', index); // Debugging
+
         let item = null;
 
         switch (category) {
@@ -148,9 +154,12 @@ document.addEventListener('click', function(event) {
                 break;
         }
 
+        console.log('Fetched item:', item); // Debugging
+
         showItemDetails(item);
     }
 });
+
 
 // Show Item Details Function
 function showItemDetails(item) {
