@@ -6,7 +6,10 @@ let themes = [];
 // Selected Elements
 let selectedGenres = [];
 let selectedMechanics = [];
-let selectedTheme = '';
+let selectedTheme = null;
+
+// Info Box Element
+let infoBox = null;
 
 // Fetch Data Function
 async function fetchData() {
@@ -52,44 +55,118 @@ function roll(category) {
     }
 
     const randomItem = items[Math.floor(Math.random() * items.length)];
-    outputElement.textContent = randomItem;
+    outputElement.textContent = randomItem.name;
+    outputElement.dataset.index = items.indexOf(randomItem);
 }
 
 // Add Function
 function add(category) {
-    let outputText = '';
-    let displayElement = null;
     let outputElement = null;
+    let displayElement = null;
+    let items = [];
+    let selectedList = null;
 
     switch (category) {
         case 'genres':
-            outputElement = document.getElementById('genres-output').textContent;
+            outputElement = document.getElementById('genres-output');
             displayElement = document.getElementById('game-genres');
-            if (outputElement && !selectedGenres.includes(outputElement)) {
-                selectedGenres.push(outputElement);
-                outputText = 'A ' + selectedGenres.join(', ') + ' game.';
-                displayElement.textContent = outputText;
-            }
+            items = genres;
+            selectedList = selectedGenres;
             break;
         case 'mechanics':
-            outputElement = document.getElementById('mechanics-output').textContent;
+            outputElement = document.getElementById('mechanics-output');
             displayElement = document.getElementById('game-mechanics');
-            if (outputElement && !selectedMechanics.includes(outputElement)) {
-                selectedMechanics.push(outputElement);
-                outputText = 'With ' + selectedMechanics.join(', ') + ' mechanics.';
-                displayElement.textContent = outputText;
-            }
+            items = mechanics;
+            selectedList = selectedMechanics;
             break;
         case 'themes':
-            outputElement = document.getElementById('themes-output').textContent;
+            outputElement = document.getElementById('themes-output');
             displayElement = document.getElementById('game-theme');
-            if (outputElement) {
-                selectedTheme = outputElement;
-                outputText = selectedTheme + ' themed.';
-                displayElement.textContent = outputText;
-            }
+            items = themes;
+            selectedTheme = null; // Reset previous theme
             break;
     }
+
+    const index = outputElement.dataset.index;
+    if (index === undefined) return;
+
+    const item = items[index];
+
+    // For themes, we only select one
+    if (category === 'themes') {
+        selectedTheme = item;
+        displayElement.innerHTML = createClickableElement(item, category);
+    } else {
+        if (!selectedList.some(i => i.name === item.name)) {
+            selectedList.push(item);
+            updateDisplay(displayElement, selectedList, category);
+        }
+    }
+
+    // Clear output after adding
+    outputElement.textContent = '';
+    delete outputElement.dataset.index;
+}
+
+// Update Display Function
+function updateDisplay(element, list, category) {
+    element.innerHTML = '';
+    list.forEach(item => {
+        element.innerHTML += createClickableElement(item, category);
+    });
+}
+
+// Create Clickable Element Function
+function createClickableElement(item, category) {
+    return `<span class="clickable-item" onclick="showInfo('${category}', '${item.name}')">${item.name}</span> `;
+}
+
+// Show Info Function
+function showInfo(category, itemName) {
+    let items = [];
+    switch (category) {
+        case 'genres':
+            items = genres;
+            break;
+        case 'mechanics':
+            items = mechanics;
+            break;
+        case 'themes':
+            items = themes;
+            break;
+    }
+
+    const item = items.find(i => i.name === itemName);
+    if (!item) return;
+
+    let infoContent = `<h4>${item.name}</h4>`;
+    if (item.category) {
+        infoContent += `<p><strong>Category:</strong> ${item.category}</p>`;
+    }
+    if (item.description) {
+        infoContent += `<p><strong>Description:</strong> ${item.description}</p>`;
+    }
+
+    // Display in the info box
+    infoBox.innerHTML = infoContent;
+}
+
+// Clear Current Idea Function
+function clearCurrentIdea() {
+    selectedGenres = [];
+    selectedMechanics = [];
+    selectedTheme = null;
+
+    document.getElementById('game-title').textContent = '';
+    document.getElementById('game-genres').innerHTML = '';
+    document.getElementById('game-mechanics').innerHTML = '';
+    document.getElementById('game-theme').innerHTML = '';
+
+    document.getElementById('genres-output').textContent = '';
+    document.getElementById('mechanics-output').textContent = '';
+    document.getElementById('themes-output').textContent = '';
+
+    infoBox.innerHTML = '';
 }
 
 // Save Idea Function
@@ -144,31 +221,25 @@ function loadIdea() {
 
     // Update display
     document.getElementById('game-title').textContent = idea.name;
-    document.getElementById('game-genres').textContent = 'A ' + selectedGenres.join(', ') + ' game.';
-    document.getElementById('game-mechanics').textContent = 'With ' + selectedMechanics.join(', ') + ' mechanics.';
-    document.getElementById('game-theme').textContent = selectedTheme + ' themed.';
-}
+    updateDisplay(document.getElementById('game-genres'), selectedGenres, 'genres');
+    updateDisplay(document.getElementById('game-mechanics'), selectedMechanics, 'mechanics');
+    if (selectedTheme) {
+        document.getElementById('game-theme').innerHTML = createClickableElement(selectedTheme, 'themes');
+    } else {
+        document.getElementById('game-theme').innerHTML = '';
+    }
 
-// Clear Current Idea Function
-function clearCurrentIdea() {
-    selectedGenres = [];
-    selectedMechanics = [];
-    selectedTheme = '';
-
-    document.getElementById('game-title').textContent = '';
-    document.getElementById('game-genres').textContent = '';
-    document.getElementById('game-mechanics').textContent = '';
-    document.getElementById('game-theme').textContent = '';
-
-    document.getElementById('genres-output').textContent = '';
-    document.getElementById('mechanics-output').textContent = '';
-    document.getElementById('themes-output').textContent = '';
+    // Clear info box
+    infoBox.innerHTML = '';
 }
 
 // Initialize the app
 async function init() {
     await fetchData();
     updateSavedIdeasDropdown();
+
+    // Get the info box element
+    infoBox = document.getElementById('info-box');
 }
 
 window.onload = init;

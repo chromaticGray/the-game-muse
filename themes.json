@@ -1,8 +1,26 @@
 [
-    "Cowboys",
-    "Space",
-    "Fantasy",
-    "Horror",
-    "Cyberpunk",
-    "Medieval"
+    {
+        "name": "Cowboys",
+        "category": "Western",
+        "description": "Set in the Wild West with cowboys and outlaws."
+    },
+    {
+        "name": "Space",
+        "description": "Set in outer space with astronauts and aliens."
+    },
+    {
+        "name": "Fantasy",
+        "category": "Mythical"
+    },
+    {
+        "name": "Horror",
+        "description": "Designed to scare and unsettle players."
+    },
+    {
+        "name": "Cyberpunk"
+    },
+    {
+        "name": "Medieval",
+        "description": "Set in the Middle Ages with knights and castles."
+    }
 ]

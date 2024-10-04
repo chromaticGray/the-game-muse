@@ -1,9 +1,29 @@
 [
-    "Rhythm-based",
-    "Action",
-    "RPG",
-    "Adventure",
-    "Puzzle",
-    "Strategy",
-    "Simulation"
+    {
+        "name": "Rhythm-based",
+        "category": "Music",
+        "description": "Games that focus on rhythm and musical elements."
+    },
+    {
+        "name": "Action",
+        "description": "Fast-paced gameplay requiring quick reflexes."
+    },
+    {
+        "name": "RPG"
+    },
+    {
+        "name": "Adventure",
+        "description": "Games that involve exploration and story."
+    },
+    {
+        "name": "Puzzle",
+        "category": "Brain Teasers"
+    },
+    {
+        "name": "Strategy",
+        "description": "Games that require planning and tactical thinking."
+    },
+    {
+        "name": "Simulation"
+    }
 ]

@@ -1,8 +1,26 @@
 [
-    "Dice Rolls",
-    "Permadeath",
-    "Crafting",
-    "Stealth",
-    "Multiplayer",
-    "Turn-based Combat"
+    {
+        "name": "Dice Rolls",
+        "category": "Randomness",
+        "description": "Mechanics involving chance through dice rolls."
+    },
+    {
+        "name": "Permadeath",
+        "description": "Character death is permanent, increasing stakes."
+    },
+    {
+        "name": "Crafting"
+    },
+    {
+        "name": "Stealth",
+        "category": "Gameplay Style",
+        "description": "Avoid detection and engage in covert actions."
+    },
+    {
+        "name": "Multiplayer"
+    },
+    {
+        "name": "Turn-based Combat",
+        "description": "Players take turns to perform actions."
+    }
 ]
