@@ -291,11 +291,11 @@ function resetDisplay() {
     selectedGenres = [];
     selectedMechanics = [];
     selectedThemes = [];
-    document.getElementById('game-title').textContent = '';
+    document.getElementById('idea-name').textContent = '';
+	document.getElementById('placeholder-text').style.display = 'block';
     document.getElementById('game-genres').innerHTML = '';
     document.getElementById('game-mechanics').innerHTML = '';
     document.getElementById('game-theme').innerHTML = '';
-    document.getElementById('placeholder-text').style.display = 'block';
 }
 
 // Update Saved Ideas Dropdown
