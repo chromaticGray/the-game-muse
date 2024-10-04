@@ -49,7 +49,6 @@ function roll(category) {
     outputElement.dataset.itemIndex = items.indexOf(randomItem);
 }
 
-// Add Function
 function add(category) {
     let outputElement = null;
     let selectedArray = null;
@@ -88,7 +87,12 @@ function add(category) {
 
         // Update display
         if (selectedArray.length > 0) {
-            let names = selectedArray.map(item => `<span class="clickable-item" data-category="${category}" data-index="${items.indexOf(item)}">${item.name}</span>`);
+            let names = selectedArray.map((item, index) => 
+                `<span class="clickable-item" data-category="${category}" data-index="${index}">
+                    ${item.name}
+                    <span class="remove-item" onclick="removeItem('${category}', ${index})">[X]</span>
+                </span>`
+            );
             let outputText = '';
 
             if (category === 'genres') {
@@ -109,6 +113,35 @@ function add(category) {
         outputElement.value = '';
         outputElement.dataset.itemIndex = '';
     }
+}
+
+// Function to Remove an Item from Display
+function removeItem(category, index) {
+    switch (category) {
+        case 'genres':
+            selectedGenres.splice(index, 1);
+            break;
+        case 'mechanics':
+            selectedMechanics.splice(index, 1);
+            break;
+        case 'themes':
+            selectedThemes.splice(index, 1);
+            break;
+    }
+    // Update the display after removal
+    loadIdea();
+}
+
+function removeFavorite() {
+    const index = document.getElementById('saved-ideas').value;
+    if (index === '') return;
+
+    let savedIdeas = JSON.parse(localStorage.getItem('savedIdeas'));
+    savedIdeas.splice(index, 1);
+    localStorage.setItem('savedIdeas', JSON.stringify(savedIdeas));
+
+    updateSavedIdeasDropdown();
+    alert('Favorite removed!');
 }
 
 // Event Listener for Clickable Items
