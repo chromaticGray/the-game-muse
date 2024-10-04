@@ -95,7 +95,7 @@ function add(category) {
                 outputText = 'A ' + names.join(', ') + ' game.';
                 displayElement.style.color = '#aa88ff'; // Purple
             } else if (category === 'mechanics') {
-                outputText = 'With ' + names.join(' and ') + ' as mechanics.';
+                outputText = 'With ' + names.join(', ') + ' as mechanics.';
                 displayElement.style.color = '#ff8888'; // Red
             } else if (category === 'themes') {
                 outputText = names.join(', ') + ' themed.';

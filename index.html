@@ -21,6 +21,7 @@
             <p id="game-genres"></p>
             <p id="game-mechanics"></p>
             <p id="game-theme"></p>
+            <button id="clear-content" onclick="resetDisplay()">Clear</button>
         </div>
 
         <!-- Controls -->
@@ -54,9 +55,10 @@
             </div>
         </div>
 
-        <!-- Favorite Button -->
-        <div id="favorite-button">
+        <!-- Favorite & Remove Buttons -->
+        <div id="favorite-buttons">
             <button onclick="saveIdea()">Favorite</button>
+            <button onclick="removeFavorite()">Remove</button>
         </div>
 
         <!-- Favorites -->
@@ -64,6 +66,11 @@
             <select id="saved-ideas" onchange="loadIdea()">
                 <option value="">Select a saved idea</option>
             </select>
+        </div>
+
+        <!-- Details Section -->
+        <div id="details">
+            <!-- Details about the selected word will go here -->
         </div>
     </div>
 
