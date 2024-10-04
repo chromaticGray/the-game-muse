@@ -113,24 +113,6 @@ function add(category) {
     }
 }
 
-// Function to Remove an Item from Display
-function removeItem(category, index) {
-    switch (category) {
-        case 'genres':
-            selectedGenres.splice(index, 1);
-            break;
-        case 'mechanics':
-            selectedMechanics.splice(index, 1);
-            break;
-        case 'themes':
-            selectedThemes.splice(index, 1);
-            break;
-    }
-    // Update the display after removal
-    loadIdea();
-}
-
-// Event Listener for Clickable Items
 // Event Listener for Clickable Items
 document.addEventListener('click', function(event) {
     if (event.target.classList.contains('clickable-item')) {
@@ -160,7 +142,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-
 // Show Item Details Function
 function showItemDetails(item) {
     if (!item) {
@@ -178,24 +159,6 @@ function showItemDetails(item) {
 
     // Display details at the bottom
     document.getElementById('details').innerHTML = content;
-}
-
-
-// Modal Function
-function showModal(content) {
-    let modal = document.createElement('div');
-    modal.id = 'modal';
-    modal.innerHTML = `
-        <div id="modal-content">
-            ${content}
-            <button id="modal-close">Close</button>
-        </div>
-    `;
-    document.body.appendChild(modal);
-
-    document.getElementById('modal-close').onclick = function() {
-        document.body.removeChild(modal);
-    };
 }
 
 // Save Idea Function
@@ -234,6 +197,7 @@ function removeFavorite() {
     localStorage.setItem('savedIdeas', JSON.stringify(savedIdeas));
 
     updateSavedIdeasDropdown();
+	updateDisplay()
     alert('Favorite removed!');
 }
 
@@ -284,7 +248,6 @@ function updateDisplay(category, selectedArray, displayElementId, prefix, suffix
         displayElement.innerHTML = '';
     }
 }
-
 
 // Reset Display Function
 function resetDisplay() {

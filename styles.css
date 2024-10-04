@@ -6,56 +6,54 @@ body {
     margin: 0;
 }
 
+/* Container for Title and Version */
+#title-container {
+    display: flex;
+    justify-content: space-between; /* Space out title and version */
+    align-items: center; /* Center align vertically */
+    max-width: 600px; /* Optional: match the width of the rest of the app */
+    margin: 0 auto 10px auto; /* Center the container */
+}
+
 /* Header Styles */
 #app-title {
-    text-align: center;
     font-size: 2em;
     font-weight: bold;
     text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-/* Invisible Text Field for Game Title */
-#idea-name {
-    border: none;
-    background: transparent;
-    color: #f0f0f0; /* Keep the text visible but blend in with the background */
-    font-size: 1.5em;
-    outline: none;
-    text-align: center;
-    width: calc(100% - 50px); /* Adjust the width to leave space for the version number */
+    margin: 0;
 }
 
 /* Version Number Styling */
 #version {
     font-size: 0.75em;
-    color: rgba(255, 255, 255, 0.5); /* Lighter than background */
-    margin-left: 10px;
-    vertical-align: middle;
-}
-
-/* Ensure text is editable but the text box is hidden */
-#idea-name::placeholder {
     color: rgba(255, 255, 255, 0.5);
+    margin-left: 10px; /* Space between title and version */
 }
-
 
 #app {
     max-width: 600px;
     margin: 0 auto;
 }
-
 #save-idea {
-    text-align: center;
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center align horizontally */
+    font-size: 1.2em;
+    color: #f0f0f0;
+    outline: none;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	
 }
 
 #save-idea input {
     width: 100%;
-    padding: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     font-size: 1.5em;
     color: #fff;
     background-color: #444454;
+    text-align: center;
     border: none;
     border-bottom: 2px solid #8888aa;
 }
