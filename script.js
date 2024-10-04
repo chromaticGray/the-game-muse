@@ -88,7 +88,6 @@ function add(category) {
             let names = selectedArray.map((item, index) => 
                 `<span class="clickable-item" data-category="${category}" data-index="${index}">
                     ${item.name}
-                    <span class="remove-item" onclick="removeItem('${category}', ${index})">[X]</span>
                 </span>`
             );
             let outputText = '';
@@ -155,6 +154,11 @@ document.addEventListener('click', function(event) {
 
 // Show Item Details Function
 function showItemDetails(item) {
+    if (!item) {
+        document.getElementById('details').innerHTML = '<p>Select a word to see its details.</p>';
+        return;
+    }
+    
     let content = `<h3>${item.name}</h3>`;
     if (item.category) {
         content += `<p><strong>Category:</strong> ${item.category}</p>`;
@@ -163,9 +167,10 @@ function showItemDetails(item) {
         content += `<p><strong>Description:</strong> ${item.description}</p>`;
     }
 
-    // Display in a modal
-    showModal(content);
+    // Display details at the bottom
+    document.getElementById('details').innerHTML = content;
 }
+
 
 // Modal Function
 function showModal(content) {
@@ -236,9 +241,8 @@ function loadIdea() {
     selectedMechanics = idea.mechanics;
     selectedThemes = idea.themes;
 
-    // Update display
+    // Set title in the input field only
     document.getElementById('idea-name').value = idea.name;
-    document.getElementById('game-title').textContent = idea.name;
 
     // Update Genres Display
     updateDisplay('genres', selectedGenres, 'game-genres', 'A ', ' game.', '#aa88ff');
@@ -249,19 +253,29 @@ function loadIdea() {
 
     // Hide placeholder text
     document.getElementById('placeholder-text').style.display = 'none';
+
+    // Display details of the first genre item (or any item as needed)
+    showItemDetails(selectedGenres[0] || selectedMechanics[0] || selectedThemes[0]);
 }
+
 
 // Update Display Function
 function updateDisplay(category, selectedArray, displayElementId, prefix, suffix, color) {
     const displayElement = document.getElementById(displayElementId);
     if (selectedArray.length > 0) {
-        let itemsList = selectedArray.map(item => `<span class="clickable-item" data-category="${category}" data-index="${item.index}">${item.name}</span>`);
+        let itemsList = selectedArray.map((item, index) => 
+            `<span class="clickable-item" data-category="${category}" data-index="${index}">${item.name}</span>`
+        );
         displayElement.innerHTML = prefix + itemsList.join(', ') + suffix;
         displayElement.style.color = color;
+
+        // Display details of the first item
+        showItemDetails(selectedArray[0]);
     } else {
         displayElement.innerHTML = '';
     }
 }
+
 
 // Reset Display Function
 function resetDisplay() {
