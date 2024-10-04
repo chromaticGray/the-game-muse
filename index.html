@@ -9,12 +9,18 @@
 </head>
 <body>
     <div id="app">
+        <!-- Save Idea Title -->
+        <div id="save-idea">
+            <input type="text" id="idea-name" placeholder="Enter Game Idea Name">
+        </div>
+
         <!-- Game Idea Display -->
         <div id="game-idea-display">
+            <p id="placeholder-text">Your New Game Idea Here Awaits!</p>
             <h2 id="game-title"></h2>
-            <p id="game-genres" style="color: purple;"></p>
-            <p id="game-mechanics" style="color: red;"></p>
-            <p id="game-theme" style="color: darkcyan;"></p>
+            <p id="game-genres"></p>
+            <p id="game-mechanics"></p>
+            <p id="game-theme"></p>
         </div>
 
         <!-- Controls -->
@@ -22,31 +28,35 @@
             <!-- Genres -->
             <div class="category">
                 <h3>Game Genres</h3>
-                <button onclick="roll('genres')">Roll</button>
-                <button onclick="add('genres')">Add</button>
-                <div id="genres-output" class="output"></div>
+                <div class="control-row">
+                    <input type="text" id="genres-output" class="output" readonly>
+                    <button onclick="roll('genres')">Roll</button>
+                    <button onclick="add('genres')">Add</button>
+                </div>
             </div>
             <!-- Mechanics -->
             <div class="category">
                 <h3>Mechanics</h3>
-                <button onclick="roll('mechanics')">Roll</button>
-                <button onclick="add('mechanics')">Add</button>
-                <div id="mechanics-output" class="output"></div>
+                <div class="control-row">
+                    <input type="text" id="mechanics-output" class="output" readonly>
+                    <button onclick="roll('mechanics')">Roll</button>
+                    <button onclick="add('mechanics')">Add</button>
+                </div>
             </div>
             <!-- Themes -->
             <div class="category">
                 <h3>Themes</h3>
-                <button onclick="roll('themes')">Roll</button>
-                <button onclick="add('themes')">Add</button>
-                <div id="themes-output" class="output"></div>
+                <div class="control-row">
+                    <input type="text" id="themes-output" class="output" readonly>
+                    <button onclick="roll('themes')">Roll</button>
+                    <button onclick="add('themes')">Add</button>
+                </div>
             </div>
         </div>
 
-        <!-- Save Idea -->
-        <div id="save-idea">
-            <input type="text" id="idea-name" placeholder="Enter game idea name">
+        <!-- Favorite Button -->
+        <div id="favorite-button">
             <button onclick="saveIdea()">Favorite</button>
-            <button onclick="clearCurrentIdea()">Clear</button>
         </div>
 
         <!-- Favorites -->
@@ -54,11 +64,6 @@
             <select id="saved-ideas" onchange="loadIdea()">
                 <option value="">Select a saved idea</option>
             </select>
-        </div>
-
-        <!-- Info Box -->
-        <div id="info-box" class="info-box">
-            <!-- Information will be displayed here -->
         </div>
     </div>
 
