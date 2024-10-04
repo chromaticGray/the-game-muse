@@ -291,7 +291,7 @@ function resetDisplay() {
     selectedGenres = [];
     selectedMechanics = [];
     selectedThemes = [];
-    document.getElementById('idea-name').textContent = '';
+    document.getElementById('idea-name').value = '';
 	document.getElementById('placeholder-text').style.display = 'block';
     document.getElementById('game-genres').innerHTML = '';
     document.getElementById('game-mechanics').innerHTML = '';
